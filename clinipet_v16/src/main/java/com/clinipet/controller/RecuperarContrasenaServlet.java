@@ -263,12 +263,16 @@ public class RecuperarContrasenaServlet extends HttpServlet {
     private String generarToken(String correo) {
         // Token de 6 dígitos (más fácil de escribir a mano)
         String token = String.valueOf((int)(Math.random() * 900000) + 100000);
+        // Nota: la expiración se calcula con NOW() del propio servidor MySQL
+        // (en vez de LocalDateTime.now() en Java) para evitar desfases de
+        // zona horaria entre el contenedor de la app y la base de datos,
+        // que hacían que el token pareciera "expirado" apenas se generaba.
         try (Connection con = Conexion.getConnection();
              PreparedStatement ps = con.prepareStatement(
-                "INSERT INTO password_reset_tokens(correo,token,expira_en,usado) VALUES(?,?,?,0)")) {
+                "INSERT INTO password_reset_tokens(correo,token,expira_en,usado) " +
+                "VALUES(?,?,DATE_ADD(NOW(), INTERVAL 30 MINUTE),0)")) {
             ps.setString(1, correo);
             ps.setString(2, token);
-            ps.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now().plusMinutes(30)));
             ps.executeUpdate();
             return token;
         } catch (Exception e) { e.printStackTrace(); return null; }
