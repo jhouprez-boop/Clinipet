@@ -272,7 +272,6 @@
           <p style="color:var(--text-muted);font-weight:700">Agrega productos desde el panel administrativo.</p>
         </div>
         <% } else { int rank = 1; for (Producto p : productos) {
-            if (!logueado && rank > 4) break;
             String img = p.getImagenUrl();
             if (img == null || img.trim().isEmpty())
               img = "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=900&q=80";
@@ -346,8 +345,8 @@
       <% } else { %>
       <div class="products-cta">
         <i class="ti ti-lock" style="font-size:2.8rem;color:var(--cp-500);display:block;margin-bottom:14px"></i>
-        <h3>¿Quieres ver todos los productos?</h3>
-        <p>Estás viendo solo 4 de nuestros productos. Regístrate y accede a la tienda completa con carrito de compras.</p>
+        <h3>¿Listo para comprar?</h3>
+        <p>Puedes explorar y buscar en todo nuestro catálogo libremente. Para completar un pedido necesitas iniciar sesión o crear una cuenta gratis.</p>
         <div class="cta-btns">
           <a href="${pageContext.request.contextPath}/registro" class="btn-cp">
             <i class="ti ti-user-plus"></i> Crear cuenta gratis
