@@ -514,7 +514,46 @@ public class DashboardDAO {
     public int eliminarMascota(int idMascota, int idUsuario) {
         if (!mascotaPerteneceUsuario(idMascota, idUsuario)) return 0;
         if (mascotaTieneCitaPendiente(idMascota)) return -1; // cita pendiente
-        return update("DELETE FROM mascotas WHERE id_mascota=?", idMascota);
+
+        // Eliminar en una transacción: primero los registros que dependen de la
+        // mascota (historias clínicas, vacunas, citas ya finalizadas/canceladas)
+        // y al final la mascota. Esto evita el error de llave foránea que ocurre
+        // si la mascota ya tiene historial médico o citas antiguas.
+        try (Connection con = Conexion.getConnection()) {
+            con.setAutoCommit(false);
+            try {
+                try (PreparedStatement ps = con.prepareStatement(
+                        "DELETE FROM historias_clinicas WHERE id_mascota = ?")) {
+                    ps.setInt(1, idMascota);
+                    ps.executeUpdate();
+                }
+                try (PreparedStatement ps = con.prepareStatement(
+                        "DELETE FROM vacunas WHERE id_mascota = ?")) {
+                    ps.setInt(1, idMascota);
+                    ps.executeUpdate();
+                }
+                try (PreparedStatement ps = con.prepareStatement(
+                        "DELETE FROM citas WHERE id_mascota = ?")) {
+                    ps.setInt(1, idMascota);
+                    ps.executeUpdate();
+                }
+                int filas;
+                try (PreparedStatement ps = con.prepareStatement(
+                        "DELETE FROM mascotas WHERE id_mascota = ?")) {
+                    ps.setInt(1, idMascota);
+                    filas = ps.executeUpdate();
+                }
+                con.commit();
+                return filas;
+            } catch (Exception e) {
+                con.rollback();
+                e.printStackTrace();
+                return 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 
     // -- PRODUCTOS --

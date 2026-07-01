@@ -631,7 +631,7 @@ label{font-weight:900;color:#064e3b;margin-bottom:6px}
                             </button>
                             <form method="post" action="${pageContext.request.contextPath}/cliente/mascotas/eliminar"
                                   style="display:inline"
-                                  onsubmit="return confirm('¿Eliminar a <%= m.get("nombre") %>? Esta acción no se puede deshacer.')">
+                                  onsubmit="return confirm('¿Eliminar a <%= m.get("nombre") %>? Se borrará también su historial médico y citas pasadas. Esta acción no se puede deshacer.')">
                                 <input type="hidden" name="id_mascota" value="<%= m.get("id") %>">
                                 <button class="icon-btn icon-x" type="submit" title="Eliminar mascota">
                                     <i class="ti ti-trash"></i>
