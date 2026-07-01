@@ -177,14 +177,6 @@ label{
                             <%= m.get("especie") %> · <%= m.get("raza") %>
                         </span><br>
                         <span class="badge-soft mt-2"><%= m.get("alerta") %></span>
-                        <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
-                            <a href="${pageContext.request.contextPath}/cliente/mascota/editar?id=<%= m.get("id") %>" class="btnx btn-soft">
-                                <i class="ti ti-edit"></i> Editar
-                            </a>
-                            <a href="${pageContext.request.contextPath}/cliente/mascota/eliminar?id=<%= m.get("id") %>" class="btnx" style="background:#ef4444;color:white">
-                                <i class="ti ti-trash"></i> Eliminar
-                            </a>
-                        </div>
                     </div>
                     <% } %>
 
