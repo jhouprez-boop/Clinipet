@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  * Genera y descarga el PDF de tratamiento de una cita.
- * Acceso: solo el cliente dueño de la cita.
+ * Acceso: solo el cliente due-o de la cita.
  *
  * GET /cliente/pdf-tratamiento?id_cita=X
  */
@@ -81,13 +81,13 @@ public class PdfTratamientoServlet extends HttpServlet {
         PdfWriter writer = PdfWriter.getInstance(doc, response.getOutputStream());
         doc.open();
 
-        // ── Colores de CliniPet ───────────────────────────────────────────
+        // - Colores de CliniPet -
         Color verde      = new Color(0, 168, 90);
         Color verdeOscuro = new Color(0, 61, 37);
         Color grisClaro  = new Color(240, 255, 247);
         Color grisTexto  = new Color(100, 116, 139);
 
-        // ── Fuentes ───────────────────────────────────────────────────────
+        // - Fuentes -
         Font fuenteTitulo  = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 22, verdeOscuro);
         Font fuenteSubtit  = FontFactory.getFont(FontFactory.HELVETICA, 11, grisTexto);
         Font fuenteSeccion = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12, verde);
@@ -95,17 +95,17 @@ public class PdfTratamientoServlet extends HttpServlet {
         Font fuenteValor   = FontFactory.getFont(FontFactory.HELVETICA, 10, Color.BLACK);
         Font fuentePie     = FontFactory.getFont(FontFactory.HELVETICA_OBLIQUE, 9, grisTexto);
 
-        // ════════════════════════════════════════════════
+        // -
         //  CABECERA
-        // ════════════════════════════════════════════════
+        // -
         PdfContentByte canvas = writer.getDirectContent();
 
-        // Rectángulo verde de cabecera
+        // Rect-ngulo verde de cabecera
         canvas.setColorFill(verde);
         canvas.rectangle(0, PageSize.A4.getHeight() - 100, PageSize.A4.getWidth(), 100);
         canvas.fill();
 
-        // Título en la cabecera
+        // T-tulo en la cabecera
         Font fTitBlanco = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 24, Color.WHITE);
         Font fSubBlanco  = FontFactory.getFont(FontFactory.HELVETICA, 11, new Color(200, 255, 230));
         Paragraph titulo = new Paragraph("🐾 CliniPet — Historia Clínica", fTitBlanco);
@@ -120,9 +120,9 @@ public class PdfTratamientoServlet extends HttpServlet {
         doc.add(new Paragraph(" "));
         doc.add(new Paragraph(" "));
 
-        // ════════════════════════════════════════════════
+        // -
         //  DATOS DE LA CITA
-        // ════════════════════════════════════════════════
+        // -
         doc.add(seccionTitulo("📋 Datos de la cita", fuenteSeccion, verde));
 
         PdfPTable tablaCita = new PdfPTable(4);
@@ -136,9 +136,9 @@ public class PdfTratamientoServlet extends HttpServlet {
         addCeldaDato(tablaCita, "Motivo",     str(d, "motivo"), fuenteLabel, fuenteValor, grisClaro);
         doc.add(tablaCita);
 
-        // ════════════════════════════════════════════════
+        // -
         //  DATOS DE LA MASCOTA
-        // ════════════════════════════════════════════════
+        // -
         doc.add(seccionTitulo("🐶 Datos de la mascota", fuenteSeccion, verde));
 
         PdfPTable tablaMascota = new PdfPTable(4);
@@ -152,7 +152,7 @@ public class PdfTratamientoServlet extends HttpServlet {
         addCeldaDato(tablaMascota, "Sexo",      str(d, "sexo"),     fuenteLabel, fuenteValor, Color.WHITE);
         doc.add(tablaMascota);
 
-        // Dueño y Veterinario
+        // Due-o y Veterinario
         PdfPTable tablaDuenio = new PdfPTable(2);
         tablaDuenio.setWidthPercentage(100);
         tablaDuenio.setSpacingBefore(4);
@@ -162,26 +162,26 @@ public class PdfTratamientoServlet extends HttpServlet {
         addCeldaDato(tablaDuenio, "Veterinario",  str(d, "veterinario"), fuenteLabel, fuenteValor, grisClaro);
         doc.add(tablaDuenio);
 
-        // ════════════════════════════════════════════════
-        //  HISTORIA CLÍNICA
-        // ════════════════════════════════════════════════
+        // -
+        //  HISTORIA CL-NICA
+        // -
         doc.add(seccionTitulo("🩺 Historia clínica", fuenteSeccion, verde));
 
         doc.add(cajaDiagnostico("Diagnóstico", str(d, "diagnostico"), fuenteLabel, fuenteValor, grisClaro));
         doc.add(cajaDiagnostico("Tratamiento indicado", str(d, "tratamiento"), fuenteLabel, fuenteValor, Color.WHITE));
 
-        // Medicación — resaltada en verde claro
+        // Medicaci-n - resaltada en verde claro
         Color verdePastel = new Color(212, 255, 235);
         doc.add(cajaDiagnostico("💊 Medicación / Dosis", str(d, "medicacion"), fuenteLabel, fuenteValor, verdePastel));
         doc.add(cajaDiagnostico("Observaciones", str(d, "observaciones"), fuenteLabel, fuenteValor, Color.WHITE));
 
-        // ════════════════════════════════════════════════
-        //  PIE DE PÁGINA
-        // ════════════════════════════════════════════════
+        // -
+        //  PIE DE P-GINA
+        // -
         doc.add(new Paragraph(" "));
         doc.add(new Paragraph(" "));
 
-        // Línea separadora
+        // L-nea separadora
         canvas.setColorStroke(verde);
         canvas.setLineWidth(1f);
         float y = writer.getVerticalPosition(true);
@@ -200,7 +200,7 @@ public class PdfTratamientoServlet extends HttpServlet {
         doc.close();
     }
 
-    // ── Helpers de formato ───────────────────────────────────────────────
+    // - Helpers de formato -
 
     private Paragraph seccionTitulo(String texto, Font fuente, Color colorLinea) {
         Paragraph p = new Paragraph(texto, fuente);

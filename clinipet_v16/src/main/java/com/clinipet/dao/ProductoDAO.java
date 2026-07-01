@@ -32,9 +32,9 @@ public class ProductoDAO {
     }
 
     /**
-     * ✅ NUEVO: Devuelve los productos ordenados por cantidad total vendida (más vendidos primero).
+     * - NUEVO: Devuelve los productos ordenados por cantidad total vendida (m-s vendidos primero).
      * Si un producto nunca ha sido vendido aparece igualmente al final (LEFT JOIN).
-     * Fallback automático en index.jsp a listar() si la lista está vacía.
+     * Fallback autom-tico en index.jsp a listar() si la lista est- vac-a.
      */
     public List<Producto> listarMasVendidos() {
         List<Producto> lista = new ArrayList<>();

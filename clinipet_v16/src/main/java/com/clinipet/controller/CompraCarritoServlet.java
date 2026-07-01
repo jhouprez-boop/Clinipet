@@ -16,13 +16,13 @@ import java.util.regex.*;
  * Procesa el carrito de compras tanto desde la tienda completa del cliente
  * como desde el index (clientes logueados).  Soporta dos formatos de JSON:
  *
- *  A) Array — enviado por el index con fetch:
+ *  A) Array - enviado por el index con fetch:
  *     [{"id":"5","nombre":"Shampoo","precio":12000,"qty":2}, ...]
  *
- *  B) Object map — enviado por la tienda completa con form POST:
+ *  B) Object map - enviado por la tienda completa con form POST:
  *     {"5":{"qty":2,"precio":12000,"nombre":"Shampoo","img":"..."}, ...}
  *
- * Si la petición es AJAX (header X-Requested-With o Fetch), responde 200 JSON.
+ * Si la petici-n es AJAX (header X-Requested-With o Fetch), responde 200 JSON.
  * Si es un form POST normal, hace redirect.
  */
 @WebServlet(name = "CompraCarritoServlet", urlPatterns = {"/comprar-carrito"})

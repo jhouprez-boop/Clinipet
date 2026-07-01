@@ -19,10 +19,10 @@ public class UsuarioDAO {
     }
 
     /**
-     * Login tradicional con correo y contraseña.
-     * Soporta contraseñas antiguas en texto plano: si detecta una, valida
+     * Login tradicional con correo y contrase-a.
+     * Soporta contrase-as antiguas en texto plano: si detecta una, valida
      * por igualdad y de inmediato la re-encripta con BCrypt en la base de
-     * datos (migración automática y transparente para el usuario).
+     * datos (migraci-n autom-tica y transparente para el usuario).
      */
     public Usuario login(String correo, String password) throws SQLException {
         String sql = "SELECT u.id_usuario, u.nombre, u.correo, u.contrasena, u.foto_perfil, u.proveedor, r.nombre AS rol "
@@ -47,10 +47,10 @@ public class UsuarioDAO {
                 if (esHashBcrypt) {
                     coincide = BCrypt.checkpw(password, hashGuardado);
                 } else {
-                    // Contraseña heredada en texto plano: comparar tal cual
+                    // Contrase-a heredada en texto plano: comparar tal cual
                     coincide = hashGuardado.equals(password);
                     if (coincide) {
-                        // Migración automática a BCrypt
+                        // Migraci-n autom-tica a BCrypt
                         int idUsuario = rs.getInt("id_usuario");
                         actualizarHash(idUsuario, BCrypt.hashpw(password, BCrypt.gensalt()));
                     }
@@ -174,12 +174,12 @@ public class UsuarioDAO {
 
     /**
      * Busca un usuario por su correo de Google; si no existe lo crea como
-     * CLIENTE con proveedor GOOGLE y sin contraseña local utilizable.
+     * CLIENTE con proveedor GOOGLE y sin contrase-a local utilizable.
      */
     public Usuario loginOrCreateGoogle(String correo, String nombre, String googleId) throws SQLException {
         Usuario existente = buscarPorCorreo(correo);
         if (existente != null) {
-            // Vincula el google_id a la cuenta existente si todavía no lo tenía
+            // Vincula el google_id a la cuenta existente si todav-a no lo ten-a
             try (Connection con = Conexion.getConnection();
                  PreparedStatement ps = con.prepareStatement(
                          "UPDATE usuarios SET google_id = COALESCE(google_id, ?) WHERE id_usuario = ?")) {

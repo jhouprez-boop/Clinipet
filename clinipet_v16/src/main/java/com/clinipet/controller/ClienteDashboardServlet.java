@@ -36,7 +36,7 @@ public class ClienteDashboardServlet extends HttpServlet {
         request.setAttribute("ventas", dao.listarVentasCliente(usuario.getId()));
         request.setAttribute("productos", dao.listarProductos());
 
-        // Historia clínica: citas con diagnóstico/tratamiento/medicación
+        // Historia cl-nica: citas con diagn-stico/tratamiento/medicaci-n
         HistoriaDAO hDao = new HistoriaDAO();
         request.setAttribute("citasHistoria", hDao.listarCitasConHistoriaCliente(usuario.getId()));
 

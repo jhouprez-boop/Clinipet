@@ -8,8 +8,8 @@ import com.zaxxer.hikari.HikariDataSource;
 
 public class Conexion {
 
-    // En producción (hosting en la nube) estas variables de entorno se leen
-    // automáticamente. Si no existen (ej. estás en tu PC con XAMPP), se usan
+    // En producci-n (hosting en la nube) estas variables de entorno se leen
+    // autom-ticamente. Si no existen (ej. est-s en tu PC con XAMPP), se usan
     // los valores por defecto de localhost.
     private static final String HOST = getEnv("DB_HOST", "localhost");
     private static final String PORT = getEnv("DB_PORT", "3306");
@@ -23,9 +23,9 @@ public class Conexion {
 
     // Pool de conexiones: reutiliza conexiones en vez de abrir una nueva por
     // cada consulta. Esto es CLAVE en hosting gratuito, porque los planes
-    // gratis de bases de datos en la nube limitan cuántas conexiones
-    // simultáneas se pueden tener (ej. Clever Cloud DEV permite solo 5).
-    // maximumPoolSize se deja deliberadamente bajo, por debajo de ese límite.
+    // gratis de bases de datos en la nube limitan cu-ntas conexiones
+    // simult-neas se pueden tener (ej. Clever Cloud DEV permite solo 5).
+    // maximumPoolSize se deja deliberadamente bajo, por debajo de ese l-mite.
     private static final HikariDataSource dataSource;
 
     static {
@@ -49,9 +49,9 @@ public class Conexion {
     }
 
     /**
-     * Devuelve una conexión del pool. El código existente que hace
+     * Devuelve una conexi-n del pool. El c-digo existente que hace
      * con.close() en un try-with-resources sigue funcionando igual:
-     * close() ya no cierra la conexión física, solo la devuelve al pool.
+     * close() ya no cierra la conexi-n f-sica, solo la devuelve al pool.
      */
     public static Connection getConnection() throws SQLException {
         try {

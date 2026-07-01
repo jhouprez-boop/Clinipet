@@ -26,7 +26,7 @@ public class CitaServlet extends HttpServlet {
         String rol = usuario.getRol();
 
         if ("CLIENTE".equalsIgnoreCase(rol)) {
-            // FIX: también cargar veterinarios disponibles
+            // FIX: tambi-n cargar veterinarios disponibles
             request.setAttribute("mascotas", dao.listarMascotasPorUsuario(usuario.getId()));
             request.setAttribute("veterinarios", dao.listarVeterinarios());
             request.getRequestDispatcher("/WEB-INF/views/cliente/agendar_cita_cliente.jsp")
@@ -78,7 +78,7 @@ public class CitaServlet extends HttpServlet {
 
             DashboardDAO dao = new DashboardDAO();
 
-            // ADMIN usa guardarCita (sin validar dueño, con precio)
+            // ADMIN usa guardarCita (sin validar due-o, con precio)
             if ("ADMIN".equalsIgnoreCase(rol) || "ADMINISTRADOR".equalsIgnoreCase(rol)
                     || "RECEPCIONISTA".equalsIgnoreCase(rol)) {
 
@@ -111,7 +111,7 @@ public class CitaServlet extends HttpServlet {
                 return;
             }
 
-            // CLIENTE usa guardarCitaCliente (valida dueño)
+            // CLIENTE usa guardarCitaCliente (valida due-o)
             int resultado = dao.guardarCitaCliente(
                     usuario.getId(), idMascota, idVeterinario, fecha, hora, motivo);
 

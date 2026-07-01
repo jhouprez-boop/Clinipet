@@ -7,7 +7,7 @@ import java.util.*;
 public class HistoriaDAO {
 
     /**
-     * Guarda o actualiza la historia clínica de una cita.
+     * Guarda o actualiza la historia cl-nica de una cita.
      */
     public void guardarOActualizar(int idMascota, int idCita,
             String diagnostico, String tratamiento,
@@ -92,7 +92,7 @@ public class HistoriaDAO {
     }
 
     /**
-     * Obtiene la historia clínica de una cita específica para pre-llenar el formulario del veterinario.
+     * Obtiene la historia cl-nica de una cita espec-fica para pre-llenar el formulario del veterinario.
      */
     public Map<String, Object> getHistoriaByCita(int idCita) {
         String sql =
@@ -126,7 +126,7 @@ public class HistoriaDAO {
     }
 
     /**
-     * Lista las historias clínicas con tratamiento de un cliente (para el dashboard cliente).
+     * Lista las historias cl-nicas con tratamiento de un cliente (para el dashboard cliente).
      */
     public List<Map<String, Object>> listarCitasConHistoriaCliente(int idUsuario) {
         String sql =

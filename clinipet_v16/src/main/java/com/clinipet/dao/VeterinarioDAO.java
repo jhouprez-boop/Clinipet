@@ -14,7 +14,7 @@ public class VeterinarioDAO {
 
     /**
      * Recupera todos los veterinarios DISPONIBLES de la tabla veterinarios.
-     * ✅ CORREGIDO: se eliminó el INNER JOIN con usuarios (la tabla veterinarios
+     * - CORREGIDO: se elimin- el INNER JOIN con usuarios (la tabla veterinarios
      * es independiente y ya tiene su propio campo correo y telefono).
      *
      * @return Lista de objetos Veterinario.
@@ -23,7 +23,7 @@ public class VeterinarioDAO {
     public List<Veterinario> listarTodos() throws SQLException {
         List<Veterinario> lista = new ArrayList<>();
 
-        // ✅ CORREGIDO: consulta directa a veterinarios sin JOIN incorrecto
+        // - CORREGIDO: consulta directa a veterinarios sin JOIN incorrecto
         // La columna se llama 'especialidad' (no 'specialty')
         String sql = "SELECT id_veterinario, nombre, correo, telefono, especialidad, estado " +
                      "FROM veterinarios " +
@@ -42,7 +42,7 @@ public class VeterinarioDAO {
                 vet.setTelefono(rs.getString("telefono"));
                 vet.setEspecialidad(rs.getString("especialidad"));
 
-                // Si el estado viene vacío o nulo de la BD, asignamos "DISPONIBLE" por defecto
+                // Si el estado viene vac-o o nulo de la BD, asignamos "DISPONIBLE" por defecto
                 String estadoDB = rs.getString("estado");
                 if (estadoDB == null || estadoDB.trim().isEmpty()) {
                     vet.setEstado("DISPONIBLE");

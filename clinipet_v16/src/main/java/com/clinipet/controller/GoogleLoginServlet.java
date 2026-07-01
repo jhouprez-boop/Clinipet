@@ -15,10 +15,10 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 /**
- * Recibe el "credential" (ID token JWT) que entrega el botón de
+ * Recibe el "credential" (ID token JWT) que entrega el bot-n de
  * Google Identity Services en el navegador, lo valida directamente
- * contra los servidores de Google (sin necesidad de librerías pesadas)
- * y crea/inicia la sesión del usuario.
+ * contra los servidores de Google (sin necesidad de librer-as pesadas)
+ * y crea/inicia la sesi-n del usuario.
  */
 @WebServlet(name = "GoogleLoginServlet", urlPatterns = {"/google-login"})
 public class GoogleLoginServlet extends HttpServlet {
@@ -84,9 +84,9 @@ public class GoogleLoginServlet extends HttpServlet {
     }
 
     /**
-     * Verifica el ID token contra el endpoint público de Google y revisa
+     * Verifica el ID token contra el endpoint p-blico de Google y revisa
      * que el "audience" coincida con nuestro Client ID, para evitar que
-     * alguien falsifique un token de otra aplicación.
+     * alguien falsifique un token de otra aplicaci-n.
      */
     private JSONObject verificarTokenGoogle(String idToken) {
         try {

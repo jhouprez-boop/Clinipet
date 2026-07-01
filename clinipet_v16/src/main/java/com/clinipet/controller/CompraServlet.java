@@ -15,7 +15,7 @@ import java.util.Map;
 @WebServlet(name = "CompraServlet", urlPatterns = {"/comprar"})
 public class CompraServlet extends HttpServlet {
 
-    // Número WhatsApp del admin (editable aquí o en BD)
+    // N-mero WhatsApp del admin (editable aqu- o en BD)
     private static final String ADMIN_WHATSAPP = "573209230129"; // Cambia por el número real del admin
 
     @Override
@@ -74,7 +74,7 @@ public class CompraServlet extends HttpServlet {
                 String waUrl = "https://wa.me/" + ADMIN_WHATSAPP + "?text=" + msg;
                 String backUrl = request.getContextPath() + ("tienda".equals(redirect) ? "/cliente/comprar" : "/cliente/dashboard") + "?ok=compra";
 
-                // Redirigir a página intermedia que abre WhatsApp y vuelve
+                // Redirigir a p-gina intermedia que abre WhatsApp y vuelve
                 response.sendRedirect(request.getContextPath() + "/whatsapp-notif?waUrl=" +
                     URLEncoder.encode(waUrl, StandardCharsets.UTF_8) + "&back=" +
                     URLEncoder.encode(backUrl, StandardCharsets.UTF_8) +

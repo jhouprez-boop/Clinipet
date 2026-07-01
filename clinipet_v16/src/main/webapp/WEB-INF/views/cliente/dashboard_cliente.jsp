@@ -556,15 +556,12 @@ label{font-weight:900;color:#064e3b;margin-bottom:6px}
                 <i class="ti ti-calendar-check"></i> ¡Cita agendada correctamente!
             <% } else if("compra".equals(okVal)){ %>
                 <i class="ti ti-shopping-cart"></i> ¡Compra realizada correctamente!
-<<<<<<< HEAD
             <% } else if("mascota".equals(okVal)){ %>
                 <i class="ti ti-paw"></i> ¡Mascota registrada correctamente!
             <% } else if("mascota_actualizada".equals(okVal)){ %>
                 <i class="ti ti-paw"></i> ¡Datos de la mascota actualizados!
             <% } else if("mascota_eliminada".equals(okVal)){ %>
                 <i class="ti ti-paw"></i> Mascota eliminada correctamente.
-=======
->>>>>>> a8a607ea862f20a42cd772394ac93aca233e77d9
             <% } else { %>
                 <i class="ti ti-check"></i> <%= okVal %>
             <% } %>
@@ -620,7 +617,6 @@ label{font-weight:900;color:#064e3b;margin-bottom:6px}
                                 <%= m.get("especie") %> · <%= m.get("raza") %>
                             </span>
                         </div>
-<<<<<<< HEAD
                         <div style="display:flex;align-items:center;gap:8px">
                             <span class="badge-soft"><%= m.get("alerta") %></span>
                             <button class="icon-btn icon-edit" type="button" title="Editar mascota"
@@ -642,10 +638,6 @@ label{font-weight:900;color:#064e3b;margin-bottom:6px}
                                 </button>
                             </form>
                         </div>
-=======
-
-                        <span class="badge-soft"><%= m.get("alerta") %></span>
->>>>>>> a8a607ea862f20a42cd772394ac93aca233e77d9
                     </div>
                     <% } %>
 
@@ -937,7 +929,6 @@ document.getElementById('modalMascota').addEventListener('click', function(e){
         cerrarModalMascota();
     }
 });
-<<<<<<< HEAD
 
 // ── EDITAR MASCOTA ──────────────────────────────────────
 function abrirEditarMascota(btn) {
@@ -1011,10 +1002,6 @@ document.getElementById('modalEditarMascota').addEventListener('click', function
     </div>
 </div>
 
-=======
-</script>
-
->>>>>>> a8a607ea862f20a42cd772394ac93aca233e77d9
 <script>
 /* ══════════════════════════════════════════════════════
    CLINIPET DASHBOARD ANIMATIONS v3

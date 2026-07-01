@@ -24,7 +24,7 @@ public class EnfermeroServlet extends HttpServlet {
         // SOLO enfermeros y veterinarios pueden acceder
         String rol = u.getRol();
         if (!"ENFERMERO".equalsIgnoreCase(rol) && !"VETERINARIO".equalsIgnoreCase(rol)) {
-            // Redirigir al panel correspondiente según su rol
+            // Redirigir al panel correspondiente seg-n su rol
             if ("ADMIN".equalsIgnoreCase(rol) || "ADMINISTRADOR".equalsIgnoreCase(rol)) {
                 response.sendRedirect(request.getContextPath() + "/dashboard");
             } else if ("RECEPCIONISTA".equalsIgnoreCase(rol)) {

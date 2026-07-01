@@ -662,17 +662,12 @@ function sendToWhatsApp() {
 
     const total = items.reduce((s, i) => s + i.precio * i.qty, 0);
     var lineas = items.map(function(i) {
-<<<<<<< HEAD
         return '\u2022 ' + i.nombre + ' x' + i.qty + ' = $' + (i.precio * i.qty).toLocaleString('es-CO');
-=======
-        return '• ' + i.nombre + ' x' + i.qty + ' = $' + (i.precio * i.qty).toLocaleString('es-CO');
->>>>>>> a8a607ea862f20a42cd772394ac93aca233e77d9
     }).join('\n');
 
     var msg = encodeURIComponent(
         'Hola CliniPet! \uD83D\uDC3E Quiero realizar el siguiente pedido:\n\n' +
         lineas +
-<<<<<<< HEAD
         '\n\n\uD83D\uDCB0 *Total: $' + total.toLocaleString('es-CO') + '*\n\n\u00BFC\u00F3mo procedo con el pago?'
     );
 
@@ -687,11 +682,6 @@ function sendToWhatsApp() {
     }).catch(function(){}).finally(function(){
         window.open('https://wa.me/' + WA_NUMBER + '?text=' + msg, '_blank');
     });
-=======
-        '\n\n\uD83D\uDCB0 *Total: $' + total.toLocaleString('es-CO') + '*\n\n\u00BFCómo procedo con el pago?'
-    );
-    window.open('https://wa.me/' + WA_NUMBER + '?text=' + msg, '_blank');
->>>>>>> a8a607ea862f20a42cd772394ac93aca233e77d9
 }
 
 function closeLoginModal() {

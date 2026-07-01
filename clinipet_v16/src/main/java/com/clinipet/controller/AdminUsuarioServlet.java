@@ -39,10 +39,10 @@ public class AdminUsuarioServlet extends HttpServlet {
 
         try {
             if ("/usuarios/guardar".equals(path)) {
-                String nombre    = request.getParameter("nombre");
-                String correo    = request.getParameter("correo");
-                String password  = request.getParameter("password");
-                String rolNuevo  = request.getParameter("rol");
+                String nombre   = request.getParameter("nombre");
+                String correo   = request.getParameter("correo");
+                String password = request.getParameter("password");
+                String rolNuevo = request.getParameter("rol");
 
                 boolean ok = new UsuarioDAO().registrar(nombre, correo, password, rolNuevo);
                 if (ok) {
@@ -57,20 +57,14 @@ public class AdminUsuarioServlet extends HttpServlet {
                 String correo = request.getParameter("correo");
                 String rolUpd = request.getParameter("rol");
                 String estado = request.getParameter("estado");
-<<<<<<< HEAD
                 String nuevaPass = request.getParameter("nueva_contrasena");
 
                 int res = dao.actualizarUsuario(id, nombre, correo, rolUpd, estado);
 
-                // Si se proporcionó nueva contraseña, actualizarla también
                 if (res > 0 && nuevaPass != null && !nuevaPass.isBlank()) {
                     new UsuarioDAO().actualizarContrasenaVeterinario(correo, nuevaPass);
                 }
 
-=======
-
-                int res = dao.actualizarUsuario(id, nombre, correo, rolUpd, estado);
->>>>>>> a8a607ea862f20a42cd772394ac93aca233e77d9
                 if (res > 0) {
                     response.sendRedirect(request.getContextPath() + "/dashboard?ok=Usuario+actualizado+correctamente");
                 } else {

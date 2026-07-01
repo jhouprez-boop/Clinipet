@@ -23,7 +23,7 @@ public class Veterinario {
     }
 
     // ==========================================
-    //          MÉTODOS GETTERS Y SETTERS
+    //          M-TODOS GETTERS Y SETTERS
     // ==========================================
 
     public int getId() {

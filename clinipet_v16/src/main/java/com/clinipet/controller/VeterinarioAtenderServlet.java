@@ -10,11 +10,11 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Servlet para que el veterinario/enfermero llene la historia clínica (diagnóstico,
- * tratamiento, medicación) de una cita y la marque como REALIZADA.
+ * Servlet para que el veterinario/enfermero llene la historia cl-nica (diagn-stico,
+ * tratamiento, medicaci-n) de una cita y la marque como REALIZADA.
  *
- * GET  /veterinario/atender?id_cita=X  → muestra el formulario
- * POST /veterinario/atender            → guarda y redirige al panel
+ * GET  /veterinario/atender?id_cita=X  - muestra el formulario
+ * POST /veterinario/atender            - guarda y redirige al panel
  */
 @WebServlet(name = "VeterinarioAtenderServlet", urlPatterns = {"/veterinario/atender"})
 public class VeterinarioAtenderServlet extends HttpServlet {
@@ -80,7 +80,7 @@ public class VeterinarioAtenderServlet extends HttpServlet {
         String obs    = nvl(request.getParameter("observaciones"));
 
         try {
-            // Guardar historia clínica
+            // Guardar historia cl-nica
             HistoriaDAO hDao = new HistoriaDAO();
             hDao.guardarOActualizar(idMascota, idCita, diag, trat, med, obs);
 
@@ -92,7 +92,7 @@ public class VeterinarioAtenderServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        // Volver al panel con mensaje de éxito
+        // Volver al panel con mensaje de -xito
         response.sendRedirect(request.getContextPath() + "/enfermero/dashboard?ok=historia");
     }
 

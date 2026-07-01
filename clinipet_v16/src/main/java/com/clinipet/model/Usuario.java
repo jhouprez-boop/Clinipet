@@ -8,7 +8,7 @@ public class Usuario {
     private String fotoPerfil; // ruta relativa de la imagen de avatar, puede ser null
     private String proveedor;  // "LOCAL" o "GOOGLE"
 
-    // Constructor original (se mantiene por compatibilidad con código existente)
+    // Constructor original (se mantiene por compatibilidad con c-digo existente)
     public Usuario(int id, String nombre, String correo, String rol) {
         this(id, nombre, correo, rol, null, "LOCAL");
     }
@@ -34,7 +34,7 @@ public class Usuario {
 
     /**
      * Devuelve la URL de avatar lista para usar en una vista (relativa al contexto),
-     * o null si el usuario no tiene foto cargada todavía.
+     * o null si el usuario no tiene foto cargada todav-a.
      */
     public String getAvatarUrlOrNull() {
         if (fotoPerfil == null || fotoPerfil.isBlank()) return null;

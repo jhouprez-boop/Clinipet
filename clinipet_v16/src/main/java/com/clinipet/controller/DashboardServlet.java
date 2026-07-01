@@ -93,7 +93,7 @@ public class DashboardServlet extends HttpServlet {
         DashboardDAO dao = new DashboardDAO();
 
         try {
-            // ✅ guardar nuevo veterinario + crear usuario de acceso
+            // - guardar nuevo veterinario + crear usuario de acceso
             if ("/veterinarios/guardar".equals(path)) {
                 String nombre       = request.getParameter("nombre");
                 String especialidad = request.getParameter("especialidad");
@@ -107,7 +107,7 @@ public class DashboardServlet extends HttpServlet {
                     return;
                 }
 
-                // 1. Crear usuario con rol VETERINARIO para que pueda iniciar sesión
+                // 1. Crear usuario con rol VETERINARIO para que pueda iniciar sesi-n
                 if (contrasena != null && !contrasena.trim().isEmpty() && correo != null && !correo.trim().isEmpty()) {
                     new com.clinipet.dao.UsuarioDAO().registrar(nombre.trim(), correo.trim(), contrasena.trim(), "VETERINARIO");
                 }
@@ -130,7 +130,7 @@ public class DashboardServlet extends HttpServlet {
                 return;
             }
 
-            // ✅ actualizar veterinario existente
+            // - actualizar veterinario existente
             if ("/veterinarios/actualizar".equals(path)) {
                 int id              = Integer.parseInt(request.getParameter("id"));
                 String nombre       = request.getParameter("nombre");
@@ -149,7 +149,7 @@ public class DashboardServlet extends HttpServlet {
                     estado       != null ? estado               : "DISPONIBLE"
                 );
 
-                // Si se ingresó contraseña nueva, actualizar o crear usuario de acceso
+                // Si se ingres- contrase-a nueva, actualizar o crear usuario de acceso
                 if (contrasena != null && !contrasena.trim().isEmpty() && correo != null && !correo.trim().isEmpty()) {
                     com.clinipet.dao.UsuarioDAO uDao = new com.clinipet.dao.UsuarioDAO();
                     boolean updated = uDao.actualizarContrasenaVeterinario(correo.trim(), contrasena.trim());

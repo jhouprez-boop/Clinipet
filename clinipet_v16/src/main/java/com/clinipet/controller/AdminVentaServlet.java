@@ -80,7 +80,7 @@ public class AdminVentaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Confirmar también puede llegar por GET (link directo)
+        // Confirmar tambi-n puede llegar por GET (link directo)
         String path = request.getServletPath();
         if ("/ventas/confirmar".equals(path)) {
             doPost(request, response);

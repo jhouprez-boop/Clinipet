@@ -161,7 +161,7 @@ public class DashboardDAO {
         );
     }
 
-    // ✅ CORREGIDO: se cambió 'specialty' por 'especialidad' para que coincida con la columna real de la BD
+    // - CORREGIDO: se cambi- 'specialty' por 'especialidad' para que coincida con la columna real de la BD
     public List<Map<String, Object>> listarVeterinarios() {
         try {
             return list(
@@ -171,7 +171,7 @@ public class DashboardDAO {
                 "ORDER BY nombre"
             );
         } catch (Exception e) {
-            // Fallback si id_usuario no existe aún en la BD
+            // Fallback si id_usuario no existe a-n en la BD
             return list(
                 "SELECT id_veterinario AS id, nombre, correo, telefono, especialidad, " +
                 "IFNULL(estado,'DISPONIBLE') AS estado " +
@@ -358,7 +358,7 @@ public class DashboardDAO {
         );
     }
 
-    // ✅ NUEVO: inserta un veterinario directamente en la tabla veterinarios
+    // - NUEVO: inserta un veterinario directamente en la tabla veterinarios
     /** Vincula el id_usuario al veterinario que tiene el mismo correo */
     public void vincularUsuarioVeterinario(String correo) {
         try {
@@ -401,7 +401,7 @@ public class DashboardDAO {
                     correoUsuario, correo
                 );
             } catch (Exception e) {
-                // Si la columna id_usuario no existe aún, no falla
+                // Si la columna id_usuario no existe a-n, no falla
                 System.out.println("[INFO] id_usuario no vinculado en veterinarios: " + e.getMessage());
             }
         }
@@ -433,7 +433,7 @@ public class DashboardDAO {
         return idUsuario; // último fallback
     }
 
-    // ✅ CORREGIDO: actualiza directamente la tabla veterinarios (no usuarios)
+    // - CORREGIDO: actualiza directamente la tabla veterinarios (no usuarios)
     public int actualizarVeterinario(int id, String nombre, String correo, String telefono, String especialidad, String estado) {
         return update(
             "UPDATE veterinarios SET nombre=?, correo=?, telefono=?, especialidad=?, estado=? WHERE id_veterinario=?",
@@ -497,7 +497,6 @@ public class DashboardDAO {
         );
     }
 
-<<<<<<< HEAD
     /** Actualiza los datos de una mascota si pertenece al usuario indicado. */
     public int actualizarMascota(int idMascota, int idUsuario, String nombre, String especie,
                                   String raza, String fechaNacimiento, String sexo) {
@@ -518,9 +517,7 @@ public class DashboardDAO {
         return update("DELETE FROM mascotas WHERE id_mascota=?", idMascota);
     }
 
-=======
->>>>>>> a8a607ea862f20a42cd772394ac93aca233e77d9
-    // ── PRODUCTOS ────────────────────────────────────────────────────────────────
+    // -- PRODUCTOS --
 
     public int guardarProducto(String codigo, String nombre, String categoria, String especie,
                                double precio, int stock, int stockMinimo, String imagenUrl,
@@ -543,13 +540,13 @@ public class DashboardDAO {
         return update("DELETE FROM productos WHERE id_producto = ?", id);
     }
 
-    // ── USUARIOS ─────────────────────────────────────────────────────────────────
+    // - USUARIOS -
 
     public int eliminarUsuario(int id) {
         return update("UPDATE usuarios SET estado = 'INACTIVO' WHERE id_usuario = ?", id);
     }
 
-    // ── CITAS ────────────────────────────────────────────────────────────────────
+    // - CITAS -
 
     public int actualizarCita(int id, String estado, String fecha, String hora,
                               String motivo, double precio) {
@@ -559,7 +556,7 @@ public class DashboardDAO {
         );
     }
 
-    // ── VENTAS ───────────────────────────────────────────────────────────────────
+    // - VENTAS -
 
     public int eliminarVenta(int id) {
         // Primero eliminar detalles para respetar FK, luego la venta
@@ -578,7 +575,7 @@ public class DashboardDAO {
         return update("UPDATE ventas SET estado='CONFIRMADO' WHERE id_venta=?", id);
     }
 
-    // ── VENTAS CLIENTE ────────────────────────────────────────────────────────────
+    // - VENTAS CLIENTE -
 
     public int eliminarVentaCliente(int idVenta, int idUsuario) {
         // Verificar que la venta pertenece al usuario antes de borrar
@@ -590,7 +587,7 @@ public class DashboardDAO {
         return update("DELETE FROM ventas WHERE id_venta=? AND id_usuario=?", idVenta, idUsuario);
     }
 
-    // ── HISTORIA CLÍNICA ─────────────────────────────────────────────────────────
+    // - HISTORIA CL-NICA -
 
     /**
      * Cambia el estado de una cita (ej. a REALIZADA luego de guardar la historia).

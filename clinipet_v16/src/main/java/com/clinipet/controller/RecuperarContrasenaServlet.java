@@ -16,32 +16,32 @@ import java.util.UUID;
 import org.json.JSONObject;
 
 /**
- * Recuperar contraseña con envío real de correo vía Brevo (API HTTP).
+ * Recuperar contrase-a con env-o real de correo v-a Brevo (API HTTP).
  *
  * Nota: NO se usa SMTP porque los hostings gratuitos (Render, Railway, etc.)
- * bloquean los puertos SMTP (25/465/587) para evitar spam. Brevo envía por
- * HTTPS (puerto 443), que nunca está bloqueado.
+ * bloquean los puertos SMTP (25/465/587) para evitar spam. Brevo env-a por
+ * HTTPS (puerto 443), que nunca est- bloqueado.
  *
  * Flujo:
- *   GET  /recuperar           → formulario de correo
- *   POST /recuperar           → genera token, envía email, redirige a confirmación
- *   GET  /recuperar/nueva     → formulario de nueva contraseña (con token en URL)
- *   POST /recuperar/nueva     → valida token y actualiza contraseña
+ *   GET  /recuperar           - formulario de correo
+ *   POST /recuperar           - genera token, env-a email, redirige a confirmaci-n
+ *   GET  /recuperar/nueva     - formulario de nueva contrase-a (con token en URL)
+ *   POST /recuperar/nueva     - valida token y actualiza contrase-a
  *
- * Configuración (Brevo):
- *   1. Crea cuenta gratis en https://www.brevo.com (300 emails/día gratis)
- *   2. Verifica tu remitente: Settings → Senders → agrega tu Gmail y confírmalo
+ * Configuraci-n (Brevo):
+ *   1. Crea cuenta gratis en https://www.brevo.com (300 emails/d-a gratis)
+ *   2. Verifica tu remitente: Settings - Senders - agrega tu Gmail y conf-rmalo
  *      por el correo que te llega.
- *   3. Genera una API Key: Settings → SMTP & API → API Keys → Generate a new API key
+ *   3. Genera una API Key: Settings - SMTP & API - API Keys - Generate a new API key
  *   4. Configura las variables de entorno BREVO_API_KEY y GMAIL_USER (el remitente verificado)
  */
 @WebServlet(name = "RecuperarContrasenaServlet",
             urlPatterns = {"/recuperar", "/recuperar/nueva"})
 public class RecuperarContrasenaServlet extends HttpServlet {
 
-    // ──────────────────────────────────────────────────────────────
-    //  ⚙️  CONFIGURACIÓN — se leen de variables de entorno
-    // ──────────────────────────────────────────────────────────────
+    // -
+    //  -  CONFIGURACI-N - se leen de variables de entorno
+    // -
     private static final String GMAIL_USER     = envOrDefault("GMAIL_USER", "jhouprez@gmail.com");
     private static final String BREVO_API_KEY  = envOrDefault("BREVO_API_KEY", "");
     private static final String APP_NAME       = "CliniPet";
@@ -50,7 +50,7 @@ public class RecuperarContrasenaServlet extends HttpServlet {
         String v = System.getenv(key);
         return (v == null || v.isBlank()) ? def : v;
     }
-    // ──────────────────────────────────────────────────────────────
+    // -
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
@@ -77,7 +77,7 @@ public class RecuperarContrasenaServlet extends HttpServlet {
                         + "/recuperar?error=El+enlace+ha+expirado+o+ya+fue+usado");
                 return;
             }
-            // Token válido
+            // Token v-lido
             if ("1".equals(check)) {
                 res.setStatus(200); res.getWriter().write("ok"); return;
             }
@@ -96,7 +96,7 @@ public class RecuperarContrasenaServlet extends HttpServlet {
         String uri = req.getRequestURI();
 
         if (uri.endsWith("/nueva")) {
-            // ── Paso final: cambiar contraseña ───────────────────
+            // - Paso final: cambiar contrase-a -
             String token     = req.getParameter("token");
             String nueva     = req.getParameter("nueva");
             String confirmar = req.getParameter("confirmar");
@@ -123,7 +123,7 @@ public class RecuperarContrasenaServlet extends HttpServlet {
             }
 
         } else {
-            // ── Paso 1: recibir correo, generar token, enviar email ──
+            // - Paso 1: recibir correo, generar token, enviar email -
             String correo = req.getParameter("correo");
             if (correo == null || correo.isBlank()) {
                 res.sendRedirect(req.getContextPath() + "/recuperar?error=Ingresa+tu+correo");
@@ -146,7 +146,7 @@ public class RecuperarContrasenaServlet extends HttpServlet {
                 return;
             }
 
-            // URL de cambio de contraseña
+            // URL de cambio de contrase-a
             String baseUrl = req.getScheme() + "://" + req.getServerName()
                     + (req.getServerPort() == 80 || req.getServerPort() == 443
                         ? "" : ":" + req.getServerPort())
@@ -155,8 +155,8 @@ public class RecuperarContrasenaServlet extends HttpServlet {
 
             boolean enviado = enviarCorreo(correo, token, enlace);
 
-            // Siempre mostrar la página de confirmación con el token visible
-            // (si el correo llegó: el usuario puede ir directo; si no: lo usa manual)
+            // Siempre mostrar la p-gina de confirmaci-n con el token visible
+            // (si el correo lleg-: el usuario puede ir directo; si no: lo usa manual)
             req.setAttribute("token",      token);
             req.setAttribute("correo",     correo);
             req.setAttribute("emailError", !enviado);
@@ -261,12 +261,12 @@ public class RecuperarContrasenaServlet extends HttpServlet {
     }
 
     private String generarToken(String correo) {
-        // Token de 6 dígitos (más fácil de escribir a mano)
+        // Token de 6 d-gitos (m-s f-cil de escribir a mano)
         String token = String.valueOf((int)(Math.random() * 900000) + 100000);
-        // Nota: la expiración se calcula con NOW() del propio servidor MySQL
+        // Nota: la expiraci-n se calcula con NOW() del propio servidor MySQL
         // (en vez de LocalDateTime.now() en Java) para evitar desfases de
         // zona horaria entre el contenedor de la app y la base de datos,
-        // que hacían que el token pareciera "expirado" apenas se generaba.
+        // que hac-an que el token pareciera "expirado" apenas se generaba.
         try (Connection con = Conexion.getConnection();
              PreparedStatement ps = con.prepareStatement(
                 "INSERT INTO password_reset_tokens(correo,token,expira_en,usado) " +

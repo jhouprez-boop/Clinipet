@@ -49,7 +49,7 @@ public class AdminProductoServlet extends HttpServlet {
                 String descripcion  = request.getParameter("descripcion");
                 String fechaVenc    = request.getParameter("fecha_vencimiento");
 
-                // Usamos actualizarProducto con id=0 → INSERT directo
+                // Usamos actualizarProducto con id=0 - INSERT directo
                 int res = dao.guardarProducto(codigo, nombre, categoria, especie,
                                               precio, stock, stockMinimo, imagenUrl,
                                               descripcion, fechaVenc);

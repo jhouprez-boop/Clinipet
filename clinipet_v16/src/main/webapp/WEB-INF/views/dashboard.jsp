@@ -1463,7 +1463,6 @@ h1,h2,h3,h4,h5,.brand-title,.page-title{font-family:"Fredoka",sans-serif;letter-
                 <div class="form-grid">
                     <div><label class="form-label">Nombre</label><input class="form-control" name="nombre" id="editUsuarioNombre" required></div>
                     <div><label class="form-label">Correo</label><input class="form-control" name="correo" id="editUsuarioCorreo" type="email" required></div>
-<<<<<<< HEAD
                     <div><label class="form-label">Rol</label>
                         <select class="form-select" name="rol" id="editUsuarioRol">
                             <option value="ADMIN">ADMIN</option>
@@ -1484,10 +1483,6 @@ h1,h2,h3,h4,h5,.brand-title,.page-title{font-family:"Fredoka",sans-serif;letter-
                         <label class="form-label">Nueva contraseña <span style="color:#94a3b8;font-weight:400">(dejar vacío para no cambiar)</span></label>
                         <input class="form-control" name="nueva_contrasena" id="editUsuarioPass" type="password" placeholder="Nueva contraseña (opcional)">
                     </div>
-=======
-                    <div><label class="form-label">Rol</label><select class="form-select" name="rol" id="editUsuarioRol"><option>ADMIN</option><option>RECEPCIONISTA</option><option>ENFERMERO</option><option>CLIENTE</option></select></div>
-                    <div><label class="form-label">Estado</label><select class="form-select" name="estado" id="editUsuarioEstado"><option>ACTIVO</option><option>INACTIVO</option></select></div>
->>>>>>> a8a607ea862f20a42cd772394ac93aca233e77d9
                     <div class="full d-flex justify-content-end gap-2 mt-2">
                         <button class="btn-cancel" type="button" onclick="closeModal('modalEditUsuario')">Cancelar</button>
                         <button class="btn-save">Actualizar usuario</button>
@@ -1648,17 +1643,12 @@ function openEditUsuario(btn){
     document.getElementById('editUsuarioId').value = btn.dataset.id || '';
     document.getElementById('editUsuarioNombre').value = btn.dataset.nombre || '';
     document.getElementById('editUsuarioCorreo').value = btn.dataset.correo || '';
-<<<<<<< HEAD
     document.getElementById('editUsuarioPass').value = '';
     // Normalizar a mayúsculas para que el select lo encuentre
     var rol = (btn.dataset.rol || 'CLIENTE').toUpperCase().trim();
     var estado = (btn.dataset.estado || 'ACTIVO').toUpperCase().trim();
     document.getElementById('editUsuarioRol').value = rol;
     document.getElementById('editUsuarioEstado').value = estado;
-=======
-    document.getElementById('editUsuarioRol').value = btn.dataset.rol || 'CLIENTE';
-    document.getElementById('editUsuarioEstado').value = btn.dataset.estado || 'ACTIVO';
->>>>>>> a8a607ea862f20a42cd772394ac93aca233e77d9
     openModal('modalEditUsuario');
 }
 
