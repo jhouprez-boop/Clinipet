@@ -549,6 +549,8 @@ function filterProducts() {
 
     noResults.style.display = (visible === 0) ? 'block' : 'none';
     searchCount.textContent = (q || activeEspecie !== 'todos') ? (visible + ' resultado' + (visible != 1 ? 's' : '')) : '';
+}
+
 // ══════════════════════════════════════════════════════════════
 //  CONTROL DE CANTIDAD POR TARJETA
 // ══════════════════════════════════════════════════════════════
