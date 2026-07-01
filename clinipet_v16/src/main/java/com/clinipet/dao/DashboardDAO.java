@@ -497,6 +497,7 @@ public class DashboardDAO {
         );
     }
 
+<<<<<<< HEAD
     /** Actualiza los datos de una mascota si pertenece al usuario indicado. */
     public int actualizarMascota(int idMascota, int idUsuario, String nombre, String especie,
                                   String raza, String fechaNacimiento, String sexo) {
@@ -517,6 +518,8 @@ public class DashboardDAO {
         return update("DELETE FROM mascotas WHERE id_mascota=?", idMascota);
     }
 
+=======
+>>>>>>> a8a607ea862f20a42cd772394ac93aca233e77d9
     // ── PRODUCTOS ────────────────────────────────────────────────────────────────
 
     public int guardarProducto(String codigo, String nombre, String categoria, String especie,

@@ -57,6 +57,7 @@ public class AdminUsuarioServlet extends HttpServlet {
                 String correo = request.getParameter("correo");
                 String rolUpd = request.getParameter("rol");
                 String estado = request.getParameter("estado");
+<<<<<<< HEAD
                 String nuevaPass = request.getParameter("nueva_contrasena");
 
                 int res = dao.actualizarUsuario(id, nombre, correo, rolUpd, estado);
@@ -66,6 +67,10 @@ public class AdminUsuarioServlet extends HttpServlet {
                     new UsuarioDAO().actualizarContrasenaVeterinario(correo, nuevaPass);
                 }
 
+=======
+
+                int res = dao.actualizarUsuario(id, nombre, correo, rolUpd, estado);
+>>>>>>> a8a607ea862f20a42cd772394ac93aca233e77d9
                 if (res > 0) {
                     response.sendRedirect(request.getContextPath() + "/dashboard?ok=Usuario+actualizado+correctamente");
                 } else {
