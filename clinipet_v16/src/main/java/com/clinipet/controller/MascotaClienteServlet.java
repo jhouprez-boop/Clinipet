@@ -7,15 +7,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.IOException;
 
-<<<<<<< HEAD
 @WebServlet(name = "MascotaClienteServlet", urlPatterns = {
     "/cliente/mascotas/guardar",
     "/cliente/mascotas/actualizar",
     "/cliente/mascotas/eliminar"
 })
-=======
-@WebServlet(name = "MascotaClienteServlet", urlPatterns = {"/cliente/mascotas/guardar"})
->>>>>>> a8a607ea862f20a42cd772394ac93aca233e77d9
 public class MascotaClienteServlet extends HttpServlet {
 
     @Override
@@ -23,10 +19,6 @@ public class MascotaClienteServlet extends HttpServlet {
             throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
-<<<<<<< HEAD
-=======
-
->>>>>>> a8a607ea862f20a42cd772394ac93aca233e77d9
         HttpSession session = request.getSession(false);
 
         if (session == null || session.getAttribute("usuario") == null) {
@@ -35,16 +27,11 @@ public class MascotaClienteServlet extends HttpServlet {
         }
 
         Usuario usuario = (Usuario) session.getAttribute("usuario");
-<<<<<<< HEAD
-=======
-
->>>>>>> a8a607ea862f20a42cd772394ac93aca233e77d9
         if (!"CLIENTE".equalsIgnoreCase(usuario.getRol())) {
             response.sendRedirect(request.getContextPath() + "/dashboard");
             return;
         }
 
-<<<<<<< HEAD
         String path = request.getServletPath();
         DashboardDAO dao = new DashboardDAO();
 
@@ -96,27 +83,3 @@ public class MascotaClienteServlet extends HttpServlet {
         }
     }
 }
-=======
-        String nombre = request.getParameter("nombre");
-        String especie = request.getParameter("especie");
-        String raza = request.getParameter("raza");
-        String fechaNacimiento = request.getParameter("fecha_nacimiento");
-        String sexo = request.getParameter("sexo");
-
-        int ok = new DashboardDAO().registrarMascotaCliente(
-                usuario.getId(),
-                nombre,
-                especie,
-                raza,
-                fechaNacimiento,
-                sexo
-        );
-
-        if (ok > 0) {
-            response.sendRedirect(request.getContextPath() + "/cliente/dashboard?ok=mascota");
-        } else {
-            response.sendRedirect(request.getContextPath() + "/cliente/dashboard?error=No se pudo registrar la mascota");
-        }
-    }
-}
->>>>>>> a8a607ea862f20a42cd772394ac93aca233e77d9
