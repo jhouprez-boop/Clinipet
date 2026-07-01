@@ -395,8 +395,20 @@ h1,h2,h3{font-family:"Fredoka",sans-serif}
             </div>
             <div class="panel-body">
 
+                <!-- BARRA DE BÚSQUEDA -->
+                <div style="position:relative;margin-bottom:16px">
+                    <i class="ti ti-search" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#94a3b8;font-size:1rem;pointer-events:none"></i>
+                    <input type="text" id="searchInputCompra" placeholder="Buscar producto por nombre, categoría o especie..."
+                           style="width:100%;padding:11px 40px 11px 40px;border-radius:14px;border:1.5px solid #e2e8f0;font-size:.95rem;font-weight:600;outline:none;box-sizing:border-box"
+                           oninput="filterCompra()"/>
+                    <button id="searchClearCompra" onclick="document.getElementById('searchInputCompra').value='';filterCompra()"
+                            style="display:none;position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#94a3b8;font-size:1.1rem">
+                        <i class="ti ti-x"></i>
+                    </button>
+                </div>
+
                 <!-- FILTROS POR ESPECIE -->
-                <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;" id="especieTabs">
+                <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px;" id="especieTabs">
                     <button class="especie-tab active" data-especie="todos" onclick="setEspecieFilter(this,'todos')">
                         <i class="ti ti-paw"></i> Todos
                     </button>
@@ -419,7 +431,14 @@ h1,h2,h3{font-family:"Fredoka",sans-serif}
                         <i class="ti ti-heart"></i> Multiespecie
                     </button>
                 </div>
-                <span id="compra-count" style="display:block;color:var(--muted);font-weight:800;font-size:.88rem;margin-bottom:14px"></span>
+
+                <!-- BADGE MÁS VENDIDOS -->
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+                    <span style="background:#1a3d2b;color:#fff;border-radius:20px;padding:6px 16px;font-weight:800;font-size:.85rem;display:inline-flex;align-items:center;gap:6px">
+                        <i class="ti ti-star-filled" style="color:#fbbf24"></i> Más vendidos · Ordenados por popularidad
+                    </span>
+                    <span id="compra-count" style="color:var(--muted);font-weight:800;font-size:.88rem"></span>
+                </div>
 
                 <div class="products-grid" id="productGrid">
                 <% for(Map<String,Object> p : productos){
@@ -435,7 +454,7 @@ h1,h2,h3{font-family:"Fredoka",sans-serif}
                     String catStr = p.get("categoria") != null ? String.valueOf(p.get("categoria")) : "";
                     String espStr = p.get("especie") != null ? String.valueOf(p.get("especie")) : "";
                 %>
-                <div class="product-card" data-especie="<%= espStr.toLowerCase() %>" data-nombre="<%= nombreStr.toLowerCase() %>">
+                <div class="product-card" data-especie="<%= espStr.toLowerCase() %>" data-nombre="<%= nombreStr.toLowerCase() %>" data-categoria="<%= catStr.toLowerCase() %>">
                     <div class="product-img" style="background-image:url('<%= img %>')"></div>
                     <div class="product-info">
                         <p class="product-name"><%= nombreStr %></p>
@@ -708,22 +727,29 @@ function setEspecieFilter(btn, especie) {
     activeEspecieCompra = especie;
     document.querySelectorAll('#especieTabs .especie-tab').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    filterByEspecie();
+    filterCompra();
 }
 
-function filterByEspecie() {
+function filterCompra() {
+    const q = (document.getElementById('searchInputCompra').value || '').toLowerCase().trim();
+    const clearBtn = document.getElementById('searchClearCompra');
+    if (clearBtn) clearBtn.style.display = q ? 'inline' : 'none';
     const cards = document.querySelectorAll('#productGrid .product-card');
     let visible = 0;
     cards.forEach(card => {
-        const esp = card.dataset.especie || '';
-        const match = activeEspecieCompra === 'todos' || esp.includes(activeEspecieCompra);
+        const esp    = card.dataset.especie   || '';
+        const nombre = card.dataset.nombre    || '';
+        const cat    = card.dataset.categoria || '';
+        const matchEsp    = activeEspecieCompra === 'todos' || esp.includes(activeEspecieCompra);
+        const matchSearch = !q || nombre.includes(q) || esp.includes(q) || cat.includes(q);
+        const match = matchEsp && matchSearch;
         card.style.display = match ? '' : 'none';
         if (match) visible++;
     });
     const noRes = document.getElementById('no-results-compra');
     if (noRes) noRes.style.display = (visible === 0) ? 'block' : 'none';
     const cnt = document.getElementById('compra-count');
-    if (cnt) cnt.textContent = activeEspecieCompra !== 'todos' ? (visible + ' producto' + (visible !== 1 ? 's' : '')) : '';
+    if (cnt) cnt.textContent = (q || activeEspecieCompra !== 'todos') ? (visible + ' producto' + (visible !== 1 ? 's' : '')) : '';
 }
 </script>
 <script src="${pageContext.request.contextPath}/assets/js/animations.js"></script>
